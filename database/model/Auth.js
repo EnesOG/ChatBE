@@ -23,6 +23,12 @@ const userSchema = new Schema({
     required: true,
     select: false,
   },
+  conversations: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Conversation",
+    },
+  ],
 });
 
 userSchema.pre("save", async function (next) {

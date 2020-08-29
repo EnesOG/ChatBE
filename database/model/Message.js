@@ -12,7 +12,7 @@ const messageSchema = new Schema({
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: "leaderSchedule",
+    ref: "User",
   },
 });
 

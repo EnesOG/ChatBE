@@ -20,10 +20,22 @@ class authService {
     }
   }
 
-  static async getParents() {
+  static async all(auth) {
     try {
-      const parents = await User.find().populate("children");
-      return parents;
+      const users = await User.find({});
+      return users.filter((user) => user._id != auth._id);
+    } catch (e) {
+      return e;
+    }
+  }
+
+  static async addConversation(usersId, convId) {
+    try {
+      const users = await User.find({}).where("_id").in(usersId).exec();
+      return users.forEach((user) => {
+        user.conversations.push(convId);
+        user.save();
+      });
     } catch (e) {
       return e;
     }
